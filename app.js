@@ -6,22 +6,16 @@
 var express = require('express');
 var engine = require('ejs-locals');
 var routes = require('./routes');
-var routes = require('./routes/login');
-var routes = require('./routes/admin');
-var http = require('http');
-var path = require('path');
+var login = require('./routes/login');
+var admin = require('./routes/admin');
 var app = express();
 var redis = require('redis');
-=======
 var http = require('http');
 var path = require('path');
-var app = express();
-var redis = require('connect-redis')(express);
 var hash = require('./pass').hash;
 
 // use ejs-locals for all ejs templates:
 app.engine('ejs', engine);
->>>>>>> edd6a1eb40b8119a15e1f833237988e215cbd83c
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -113,8 +107,9 @@ if ('development' == app.get('env')) {
 
 // actions
 app.get('/', routes.index);
-
-app.post('/login', routes.loginPost);>>>>>>> edd6a1eb40b8119a15e1f833237988e215cbd83c
+app.get('/login', login.login);
+app.post('/login', login.loginPost);
+app.get('/admin', restrict, admin.admin);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

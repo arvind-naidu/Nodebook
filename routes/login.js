@@ -3,15 +3,15 @@
  * GET login page.
  */
 
-exports.login = function(req, res){
-  res.render('login', { title: 'the login page', temp: 'test' });
+exports.login = function(req, res) {
+  res.render('login', { name: 'the login page', temp: 'test' });
 };
 
 /*
  * POST login page.
  */
 
-exports.loginPost = function(req, res){
+exports.loginPost = function(req, res) {
   authenticate(req.body.username, req.body.password, function(err, user){
     if (user) {
       // Regenerate session when signing in

@@ -8,11 +8,7 @@
   "dependencies": {
     "express": "3.4.4",
     "ejs": "*",
-<<<<<<< HEAD
     "redis": "~0.9.0",
-=======
-    "ejs-locals": "~1.0.2",
->>>>>>> edd6a1eb40b8119a15e1f833237988e215cbd83c
-    "connect-redis": "~1.4.6"
+    "ejs-locals": "~1.0.2"
   }
 }
