@@ -14,6 +14,11 @@ var redis = require('connect-redis')(express);
 // use ejs-locals for all ejs templates:
 app.engine('ejs', engine);
 
+// authentication
+var auth = express.basicAuth(function(user, pass) {
+ return user === 'testUser' && pass === 'testPass';
+});
+
 // all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
@@ -43,7 +48,7 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-app.get('/', routes.index);
+app.get('/', auth, routes.index);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
