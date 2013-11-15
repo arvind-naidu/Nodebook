@@ -1,16 +1,16 @@
 <% layout('layout') -%>
 
+<div id="indexWrapper">
 <div id="submission">
-    
     <div id="login-title">
         <h1>New Message</h1>
     </div>
-    <div id="login-content">
+    <form id="login-content" method="POST" action="savePost">
         <input type="text" placeholder="Full Name">
         <input type="text" placeholder="Email">
         <textarea name="message" id="submission-message" cols="30" rows="5" placeholder="Your Message"></textarea>
         <input type="submit">
-    </div>
+    </form>
 </div>
 
 <div id="messages" data-bind="foreach:guestMessages">
@@ -27,14 +27,16 @@
       </div>  
     </div>
 </div>
-
+</div>
 
 <script>
     var guestMessage = function(data, parent) {
         var self = this;
 
-		data = JSON.parse(data);
-		
+        if (typeof data == "string") {
+          data = JSON.parse(data);  
+        }        
+
         self.message =  ko.observable(data.message);
         self.email =  ko.observable(data.email);
         self.name =  ko.observable(data.name);
@@ -47,17 +49,13 @@
     var indexViewModel = function(data) {
         var self = this;
 
-        console.log(data)
-
         var boundMessages = $.map(data, function(message){
             return new guestMessage(message, self);
         });
         self.guestMessages = ko.observableArray(boundMessages);
-		console.log(self.guestMessages());
 		
-        return self;
     };
 
     console.log(<%- guestMessages %>)
-    ko.applyBindings(new indexViewModel(<%- JSON.stringify(guestMessages) %>), $('#messages')[0]);
+    ko.applyBindings(new indexViewModel(<%- JSON.stringify(guestMessages) %>), $('#indexWrapper')[0]);
 </script>

@@ -20,3 +20,32 @@
     </div>
 </div>
 
+<script>
+    var guestMessage = function(data, parent) {
+        var self = this;
+
+    data = JSON.parse(data);
+    
+        self.message =  ko.observable(data.message);
+        self.email =  ko.observable(data.email);
+        self.name =  ko.observable(data.name);
+        self.entryDate =  ko.observable(new Date(data.entryDate));
+        self.status =  ko.observable(data.status);
+
+        return self;
+    };
+
+    var indexViewModel = function(data) {
+        var self = this;
+
+        var boundMessages = $.map(data, function(message){
+            return new guestMessage(message, self);
+        });
+        self.guestMessages = ko.observableArray(boundMessages);
+    
+        return self;
+    };
+
+    console.log(<%- guestMessages %>)
+    ko.applyBindings(new indexViewModel(<%- JSON.stringify(guestMessages) %>), $('#messages')[0]);
+</script>
