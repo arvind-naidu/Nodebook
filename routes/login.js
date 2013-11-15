@@ -23,13 +23,13 @@ exports.loginPost = function(req, res) {
         req.session.user = user;
         req.session.success = 'Authenticated as ' + user.name
           + ' click to <a href="/logout">logout</a>. '
-          + ' You may now access <a href="/restricted">/restricted</a>.';
-        res.redirect('back');
+          + ' You may now access <a href="/admin">/restricted</a>.';
+        res.redirect('admin');
       });
     } else {
       req.session.error = 'Authentication failed, please check your '
         + ' username and password.'
-        + ' (use "tj" and "foobar")';
+        + ' (use "admin" and "admin")';
       res.redirect('login');
     }
   });
