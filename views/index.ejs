@@ -37,6 +37,8 @@
     var guestMessage = function(data, parent) {
         var self = this;
 
+		data = JSON.parse(data);
+		
         self.message =  ko.observable(data.message);
         self.email =  ko.observable(data.email);
         self.name =  ko.observable(data.name);
@@ -54,11 +56,12 @@
         var boundMessages = $.map(data, function(message){
             return new guestMessage(message, self);
         });
-        self.guestMessages = data;
-
+        self.guestMessages = ko.observableArray(boundMessages);
+		console.log(self.guestMessages());
+		
         return self;
     };
 
-    console.log(<%- JSON.stringify(guestMessages) %>)
+    console.log(<%- guestMessages %>)
     ko.applyBindings(new indexViewModel(<%- JSON.stringify(guestMessages) %>), $('#messages')[0]);
 </script>

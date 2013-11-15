@@ -15,6 +15,12 @@ var http = require('http');
 var path = require('path');
 var hash = require('./pass').hash;
 
+redis.client = redis.createClient(10210, 'pub-redis-10210.us-east-1-4.1.ec2.garantiadata.com');
+redis.client.auth("hackdayGuestbook", function() {console.log("Connected!");});
+redis.client.on("error", function (err) {
+	console.log("error event - " + client.host + ":" + client.port + " - " + err);
+});
+
 // use ejs-locals for all ejs templates:
 app.engine('ejs', engine);
 
