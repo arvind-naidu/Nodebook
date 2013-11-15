@@ -15,7 +15,7 @@ exports.admin = function(req, res){
       for (var i = 0; i < result.length; i++){
         json.push(result[i])
       }
-      res.render('index', {guestMessages:json});
+      res.render('admin', {guestMessages:json});
     });
   })
   .exec(function (err, replies) {
