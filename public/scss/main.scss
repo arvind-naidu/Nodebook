@@ -5,7 +5,7 @@
 /* BASE */
 /********/
 
-body {font:300 16px 'Roboto Condensed', sans-serif; background:#eee;}
+body {color:#666; font:400 16px 'Roboto Condensed', sans-serif; background:#eee;}
 h1 {font-size:2em;}
 
 input {}
@@ -16,10 +16,9 @@ textarea {}
 /*************/
 
 $site-width: 90%;
-$pri-color: #fff;
-$sec-color: #fff;
+$pri-color: #555555;
+$sec-color: #FF7400;
 $ter-color: #fff;
-$link-color: #fff;
 
 
 /**********/
@@ -34,14 +33,66 @@ $link-color: #fff;
 #header-inner {text-align:center; width:$site-width; margin:0 auto;}
 #title {margin: 0 auto;}
 #title h1 {}
-.node {color:orange;}
-#nav {list-style:none; margin:0; padding:0; postion:absolute; bottom:0;}
+.node {color:$sec-color;}
+#nav {list-style:none; margin:1em 0; padding:0; postion:absolute; bottom:0;}
 #nav li {display:inline-block;}
-#nav li a {padding:.5em; background:#fff; display:block;}
+#nav li a {color:#fff; text-decoration:none; padding:.2em; border-bottom:1px dotted #fff; display:block;}
+#nav li a.selected {background:#fff;}
+
+/* Submission */
+#submission {
+  width:100%;
+  margin:0 auto 1em auto;
+  background:#fff;
+  border-radius:4px; 
+  box-shadow:0px 0px 5px 2px rgba(0, 0, 0, 0.1);
+}
+#submission input, #submission textarea {
+  width:100%;
+  margin:0 0 2em 0;
+  padding:.5em; 
+  border:1px solid rgba(0, 0, 0, 0.1); 
+  border-radius:3px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+#submission input[type="submit"] {margin:0;}
+#submission-title {padding:1em; background:#555;}
+#submission-title h1 {color:#fff; font-size:1em; margin:0;}
+#submission-content {padding:2em;}
+
+/* Login */
+#login {
+  width:100%;
+  margin:0 auto;
+  background:#fff;
+  border-radius:4px; 
+  box-shadow:0px 0px 5px 2px rgba(0, 0, 0, 0.1);
+}
+#login input {
+  width:100%;
+  margin:0 0 1em 0;
+  padding:.5em; 
+  border:1px solid rgba(0, 0, 0, 0.1); 
+  border-radius:3px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+#login-title {padding:1em; background:#555;}
+#login-title h1 {color:#fff; font-size:1em; margin:0;}
+#login-content {padding:2em;}
 
 
 /* Footer */
-#footer {text-align:center; width:$site-width; margin:0 auto; clear:both;}
+#footer {color:#fff; margin:2em 0 0 0; background:#555; overflow:hidden; clear:both;}
+#footer-inner {width:$site-width; margin:0 auto; padding:1em 0; overflow:hidden;}
+#footer-credits {width:50%; float:left;}
+#footer-credits p {text-shadow:1px 1px 2px rgba(0, 0, 0, 0.3); margin:0; padding:0;}
+#footer-admin {text-align:right; width:50%; float:right;}
+#footer-admin a {color:orange; text-decoration:none;}
+#footer-admin a:hover {border-bottom:1px dotted #fff;}
 
 /***********/
 /* MODULES */
@@ -56,14 +107,16 @@ $link-color: #fff;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
+  overflow:hidden;
 }
 .message-text {padding:2em; }
 .message-bar {color:#fff; padding:1em; background:#555; overflow:hidden;}
 .message-info {float:left;}
 .message-date {}
 .message-guest {}
-.message-actions {list-style:none; margin:0; padding:0;}
+.message-actions {list-style:none; margin:0; padding:0; float:right;}
 .message-actions li {display:inline-block;}
+.message-actions li a {color:#fff;}
 .message-actions li a {color:#fff;}
 
 /* Buttons */
@@ -91,10 +144,13 @@ $link-color: #fff;
   /* LAYOUT */
   /**********/
   
-  #header-inner, #core, #footer {width:$site-width;}
+  #header-inner, #core, #footer-inner {width:$site-width;}
   
   #title {float:left;}
   #nav {float:right}
+
+  /* Login */
+  #login {width:45%;}
 
 
   /***********/
@@ -121,7 +177,8 @@ $link-color: #fff;
   /* LAYOUT */
   /**********/
    
-  #header-inner, #core, #footer {width:$site-width;}
+  #header-inner, #core, #footer-inner {width:$site-width;}
+
 
   /***********/
   /* MODULES */

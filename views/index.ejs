@@ -1,5 +1,18 @@
 <% layout('layout') -%>
 
+<div id="submission">
+    
+    <div id="login-title">
+        <h1>New Message</h1>
+    </div>
+    <div id="login-content">
+        <input type="text" placeholder="Full Name">
+        <input type="text" placeholder="Email">
+        <textarea name="message" id="submission-message" cols="30" rows="5" placeholder="Your Message"></textarea>
+        <input type="submit">
+    </div>
+</div>
+
 <div id="messages" data-bind="foreach:guestMessages">
     <div class="message">
       <div class="message-text">
@@ -8,8 +21,8 @@
       <div class="message-bar">  
           
           <div class="message-info">
-            <div class="message-date" data-bind="text:entryDate"></div>
             <div class="message-guest" data-bind="text:name"></div>
+            <div class="message-date" data-bind="text:entryDate"></div>
           </div>
           
           <ul class="message-actions">
