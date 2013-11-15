@@ -1,4 +1,6 @@
 <% layout('layout') -%>
+<<<<<<< HEAD
+=======
 
 <div>
   <div><%- session.errorMessage %></div>
@@ -7,3 +9,5 @@
     <input type="password" name="password" />
     <input type="submit" />
   </form>
+</div>
+>>>>>>> 62ede70536cf6cceba16f8b63e72fa413dbb6f8b
