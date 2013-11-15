@@ -6,6 +6,8 @@
 var express = require('express');
 var engine = require('ejs-locals');
 var routes = require('./routes');
+var routes = require('./routes/login');
+var routes = require('./routes/admin');
 var http = require('http');
 var path = require('path');
 var app = express();
@@ -78,6 +80,7 @@ function authenticate(name, pass, fn) {
   })
 }
 
+// used to restrict pages
 function restrict(req, res, next) {
   if (req.session.user) {
     next();
@@ -97,8 +100,9 @@ if ('development' == app.get('env')) {
 
 // actions
 app.get('/', routes.index);
-app.get('/login', routes.index);
-app.get('/admin', restrict, routes.index);
+app.get('/login', routes.login);
+app.post('/login', routes.loginPost)
+app.get('/admin', restrict, routes.admin);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
