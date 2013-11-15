@@ -1,20 +1,15 @@
-// data interaction routes
+var redis = require('redis');
 
 exports.savePost = function(req, res) {
-  var newPost = {};
-  //newPost.FullName = req.body['todo-text'];
-  newPost.FullName = "Rose McCluskey";
-  //newPost.Email = req.Email;
-  newPost.Email = "rmccluskey@hsc.wvu.edu";
-  //newPost.Entry = req.Entry;
-  newPost.Entry = "New Entry!";
-  newPost.EntryDate = new Date();
-  newPost.Approved = false;
-  
-  client.SADD("Entry", newPost);
-  res.redirect('/');
+  var GuestMessage = {"message": "Hello there Team Awesome!", "email": "email@mail.com", "name": "Rose", "entryDate": "11/15/2013", "approved": "False"};
+  redis.client.incr('counter', function(err, unique) {
+    GuestMessage.key = "messages." + unique;
+	var result = setPost(unique, GuestMessage);
+	console.log(result);
+	res.redirect('/');
+  });
 };
 
-exports.getPosts = function(req, res) {
-	
-};
+function setPost (unique, data) {
+	redis.client.set("messages." + unique, JSON.stringify(data));
+}
