@@ -4,12 +4,16 @@
  */
 
 var express = require('express');
+var engine = require('ejs-locals');
 var routes = require('./routes');
 var user = require('./routes/user');
 var http = require('http');
 var path = require('path');
 
 var app = express();
+
+// use ejs-locals for all ejs templates:
+app.engine('ejs', engine);
 
 // all environments
 app.set('port', process.env.PORT || 3000);
