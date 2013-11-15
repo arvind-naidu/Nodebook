@@ -32,7 +32,7 @@ $ter-color: #fff;
 #header {color:#fff; margin: 0 0 2em 0; background:#555; overflow:hidden;}
 #header-inner {text-align:center; width:$site-width; margin:0 auto;}
 #title {margin: 0 auto;}
-#title h1 {}
+#title a {color:#fff; text-decoration:none;}
 .node {color:$sec-color;}
 #nav {list-style:none; margin:1em 0; padding:0; postion:absolute; bottom:0;}
 #nav li {display:inline-block;}
@@ -86,10 +86,10 @@ $ter-color: #fff;
 
 
 /* Footer */
-#footer {margin:2em 0 0 0; overflow:hidden; clear:both;}
+#footer {margin:0; overflow:hidden; clear:both;}
 #footer-inner {color: #999; text-align:center; width:$site-width; margin:0 auto; padding:1em 0; overflow:hidden;}
-
-#footer-inner i {margin:0 .5em;}
+#footer-inner a {color:#999;}
+#footer-inner i {font-size:.95em; margin:0 .5em;}
 
 #footer-credits {}
 #footer-credits p {text-shadow:1px 1px 2px rgba(0, 0, 0, 0.3); margin:0; padding:0;}
