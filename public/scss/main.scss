@@ -49,7 +49,7 @@ $ter-color: #fff;
 }
 #submission input, #submission textarea {
   width:100%;
-  margin:0 0 2em 0;
+  margin:0 0 1em 0;
   padding:.5em; 
   border:1px solid rgba(0, 0, 0, 0.1); 
   border-radius:3px;
@@ -86,13 +86,15 @@ $ter-color: #fff;
 
 
 /* Footer */
-#footer {color:#fff; margin:2em 0 0 0; background:#555; overflow:hidden; clear:both;}
-#footer-inner {width:$site-width; margin:0 auto; padding:1em 0; overflow:hidden;}
-#footer-credits {width:50%; float:left;}
+#footer {margin:2em 0 0 0; overflow:hidden; clear:both;}
+#footer-inner {color: #999; text-align:center; width:$site-width; margin:0 auto; padding:1em 0; overflow:hidden;}
+
+#footer-inner i {margin:0 .5em;}
+
+#footer-credits {}
 #footer-credits p {text-shadow:1px 1px 2px rgba(0, 0, 0, 0.3); margin:0; padding:0;}
 #footer-admin {text-align:right; width:50%; float:right;}
-#footer-admin a {color:orange; text-decoration:none;}
-#footer-admin a:hover {border-bottom:1px dotted #fff;}
+
 
 /***********/
 /* MODULES */
@@ -112,12 +114,13 @@ $ter-color: #fff;
 .message-text {padding:2em; }
 .message-bar {color:#fff; padding:1em; background:#555; overflow:hidden;}
 .message-info {float:left;}
-.message-date {}
 .message-guest {}
+.message-date {font-size:.8em;}
 .message-actions {list-style:none; margin:0; padding:0; float:right;}
 .message-actions li {display:inline-block;}
 .message-actions li a {color:#fff;}
-.message-actions li a {color:#fff;}
+.message-actions li a.approve:hover {color:#75D76F;}
+.message-actions li a.decline:hover {color:#D77171;}
 
 /* Buttons */
 .button {}
