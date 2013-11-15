@@ -11,11 +11,17 @@ var routes = require('./routes/admin');
 var http = require('http');
 var path = require('path');
 var app = express();
+var redis = require('redis');
+=======
+var http = require('http');
+var path = require('path');
+var app = express();
 var redis = require('connect-redis')(express);
 var hash = require('./pass').hash;
 
 // use ejs-locals for all ejs templates:
 app.engine('ejs', engine);
+>>>>>>> edd6a1eb40b8119a15e1f833237988e215cbd83c
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -28,8 +34,12 @@ app.use(express.urlencoded());
 app.use(express.methodOverride());
 app.use(express.bodyParser());
 app.use(express.cookieParser('your secret here'));
+app.use(express.session());
+
+// redis stuff
+/*
 app.use(express.session({
-  store: new redis({
+  store: new connection({
     host: 'pub-redis-10210.us-east-1-4.1.ec2.garantiadata.com',
     port: 10210,
     db: 1,
@@ -37,6 +47,9 @@ app.use(express.session({
   }),
   secret: '1234567890QWERTY'
 }));
+*/
+var client = redis.createClient(10210, 'pub-redis-10210.us-east-1-4.1.ec2.garantiadata.com');
+client.auth("hackdayGuestbook", function() {console.log("Connected!");});
 
 // session-persisted message middleware
 app.use(function(req, res, next){
@@ -100,9 +113,8 @@ if ('development' == app.get('env')) {
 
 // actions
 app.get('/', routes.index);
-app.get('/login', routes.login);
-app.post('/login', routes.loginPost)
-app.get('/admin', restrict, routes.admin);
+
+app.post('/login', routes.loginPost);>>>>>>> edd6a1eb40b8119a15e1f833237988e215cbd83c
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
