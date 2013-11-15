@@ -26,13 +26,22 @@ exports.admin = function(req, res){
 };
 
 exports.approve = function(req, res) {
-  var message = redis.client.get("messages." + req.query.id);
-  message.approved = true;
-  res.send(redis.client.set("messages." + req.query.id, message));
+  redis.client.get(req.query.id, function(err, result) {
+      console.log(result)
+      result = JSON.parse(result);
+      result.approved = true;
+      console.log(result);
+      res.send(redis.client.set(req.query.id, JSON.stringify(result)));
+  });
+  
 }
 
 exports.unapprove = function(req, res) {
-  var message = redis.client.get("messages." + req.query.id);
-  message.approved = false;
-  res.send(redis.client.set("messages." + req.query.id, message));
+  redis.client.get(req.query.id, function(err, result) {
+      console.log(result)
+      result = JSON.parse(result);
+      result.approved = false;
+      console.log(result);
+      res.send(redis.client.set(req.query.id, JSON.stringify(result)));
+  });
 }

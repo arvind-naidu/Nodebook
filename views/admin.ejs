@@ -13,8 +13,8 @@
           </div>
           
           <ul class="message-actions">
-              <li><a href="#"><i class="fa fa-check"></i></a></li>
-              <li><a href="#"><i class="fa fa-times"></i></a></li>
+              <li><a href="#" data-bind="click:approve, visible:!approved()"><i class="fa fa-check"></i></a></li>
+              <li><a href="#" data-bind="click:unapprove, visible:approved"><i class="fa fa-times"></i></a></li>
           </ul>
       </div>  
     </div>
@@ -22,20 +22,44 @@
 
 <script>
     var guestMessage = function(data, parent) {
-        var self = this;
+      var self = this;
 
-    data = JSON.parse(data);
-    
-        self.message =  ko.observable(data.message);
-        self.email =  ko.observable(data.email);
-        self.name =  ko.observable(data.name);
-        self.entryDate =  ko.observable(new Date(data.entryDate));
-        self.status =  ko.observable(data.status);
+      data = JSON.parse(data);
+      
+          self.message =  ko.observable(data.message);
+          self.email =  ko.observable(data.email);
+          self.name =  ko.observable(data.name);
+          self.entryDate =  ko.observable(new Date(data.entryDate));
+          self.status =  ko.observable(data.status);
+          self.key = ko.observable(data.key);
+          self.approved = ko.observable(data.approved);
 
-        return self;
-    };
+          self.approve = function() {
+            $.ajax({
+              url: 'approve?id=' + self.key(),
+              type: 'POST',
+              success: function(response) {
+                console.log(response);
+              }
+            });
+            return false;
+          }
 
-    var indexViewModel = function(data) {
+          self.unapprove = function() {
+            $.ajax({
+              url: 'unapprove?id=' + self.key(),
+              type: 'POST',
+              success: function(response) {
+                console.log(response);
+              }
+            });
+            return false;
+          }
+
+          return self;
+      };
+
+      var indexViewModel = function(data) {
         var self = this;
 
         var boundMessages = $.map(data, function(message){
@@ -43,6 +67,8 @@
         });
         self.guestMessages = ko.observableArray(boundMessages);
     
+        
+
         return self;
     };
 
