@@ -12,7 +12,10 @@ exports.index = function(req, res){
 		redis.client.mget(replies, function(err, result) {
 			var json = new Array();
 			for (var i = 0; i < result.length; i++){
-				json.push(result[i])
+				var jsonObject = JSON.parse(result[i]);
+				if(jsonObject.approved == true) {
+					json.push(result[i]);
+				}
 			}
 			res.render('index', {guestMessages:json});
 		});
