@@ -4,5 +4,17 @@
  */
 
 exports.index = function(req, res){
-  res.render('index', { name: 'the index page', temp: 'test' });
+  var messages = {
+    "guestMessages": [
+        {
+            "message": "test",
+            "email": "test@gmail.com",
+            "name": "Jack",
+            "entryDate": "12/12/12",
+            "status": true
+        }
+    ]
+};
+
+  res.render('index', messages);
 };
