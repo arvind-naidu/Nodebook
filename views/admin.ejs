@@ -1,10 +1,22 @@
 <% layout('layout') -%>
 
-<div class="message">
-  <div class="message-text">
-      <p>I'm releasing this big movie, you should come check it out. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur, exercitationem, odio, impedit, dolor nam ex harum nostrum aliquam tempore quam assumenda magnam culpa facilis reiciendis deserunt deleniti non sapiente! Molestias.</p>
-  </div>      
-  <div class="message-date">May 25th, 1977</div>      
-  <div class="message-guest">George Lucas</div>      
+<div id="messages" data-bind="foreach:guestMessages">
+    <div class="message">
+      <div class="message-text">
+          <p data-bind="text:message"></p>
+      </div>
+      <div class="message-bar">  
+          
+          <div class="message-info">
+            <div class="message-date" data-bind="text:entryDate"></div>
+            <div class="message-guest" data-bind="text:name"></div>
+          </div>
+          
+          <ul class="message-actions">
+              <li><a href="#"><i class="fa fa-check"></i></a></li>
+              <li><a href="#"><i class="fa fa-times"></i></a></li>
+          </ul>
+      </div>  
+    </div>
 </div>
 

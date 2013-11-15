@@ -1,9 +1,10 @@
 <% layout('layout') -%>
 
-<div>
-  <div><%- session.errorMessage %></div>
+<div id="login">
+  <span><%- session.errorMessage %></span>
   <form method="POST" action="login">
     <input type="text" name="username" />
     <input type="password" name="password" />
     <input type="submit" />
   </form>
+</div>
