@@ -9,8 +9,8 @@ var routes = require('./routes');
 var user = require('./routes/user');
 var http = require('http');
 var path = require('path');
-
 var app = express();
+var redis = require('connect-redis')(express);
 
 // use ejs-locals for all ejs templates:
 app.engine('ejs', engine);
@@ -25,9 +25,19 @@ app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.methodOverride());
 app.use(express.cookieParser('your secret here'));
-app.use(express.session());
+app.use(express.session({
+  store: new redis({
+    host: 'pub-redis-10210.us-east-1-4.1.ec2.garantiadata.com',
+    port: 10210,
+    db: 1,
+    pass: 'hackdayGuestbook'
+  }),
+  secret: '1234567890QWERTY'
+}));
+
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
+
 
 // development only
 if ('development' == app.get('env')) {
