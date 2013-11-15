@@ -8,6 +8,7 @@ var engine = require('ejs-locals');
 var routes = require('./routes');
 var login = require('./routes/login');
 var admin = require('./routes/admin');
+var data = require('./routes/data');
 var app = express();
 var redis = require('redis');
 var http = require('http');
@@ -31,17 +32,6 @@ app.use(express.cookieParser('your secret here'));
 app.use(express.session());
 
 // redis stuff
-/*
-app.use(express.session({
-  store: new connection({
-    host: 'pub-redis-10210.us-east-1-4.1.ec2.garantiadata.com',
-    port: 10210,
-    db: 1,
-    pass: 'hackdayGuestbook'
-  }),
-  secret: '1234567890QWERTY'
-}));
-*/
 var client = redis.createClient(10210, 'pub-redis-10210.us-east-1-4.1.ec2.garantiadata.com');
 client.auth("hackdayGuestbook", function() {console.log("Connected!");});
 
@@ -110,6 +100,7 @@ app.get('/', routes.index);
 app.get('/login', login.login);
 app.post('/login', login.loginPost);
 app.get('/admin', restrict, admin.admin);
+app.get('/savePost', data.savePost);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
