@@ -6,6 +6,7 @@
 - Redis
 - Express
 - EJS
+- Knockout
 
 ## Team Members
 - Jack Dehlin
