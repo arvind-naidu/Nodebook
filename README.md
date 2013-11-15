@@ -9,11 +9,12 @@
 - Knockout
 
 ## Team Members
-- Jack Dehlin
-- Libby DeHaan
-- Rose McCluskey
-- Tanner Yuhase
-- Travis Maynard
+- Jack Dehlin (Programming)
+- Kent Pirlo (Server)
+- Libby DeHaan (Database)
+- Rose McCluskey (Database)
+- Tanner Yuhase (Design)
+- Travis Maynard (Design)
 
 ## Notes
 
