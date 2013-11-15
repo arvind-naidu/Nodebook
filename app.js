@@ -67,10 +67,7 @@ function authenticate(name, pass, fn) {
   var user = users[name];
   // query the db for the given username
   if (!user) return fn(new Error('cannot find user'));
-
-
   if (pass == user.pass) return fn(null, user);
-
   fn(new Error('invalid password'));
 }
 
@@ -101,20 +98,17 @@ app.post('/login', function(req, res) {
       // Regenerate session when signing in
       // to prevent fixation 
       req.session.regenerate(function(){
-
-        console.log(user);
-
         // Store the user's primary key 
         // in the session store to be retrieved,
         // or in this case the entire user object
         req.session.user = user;
-        req.session.success = 'Authenticated as ' + user.name
+        req.session.successMessage = 'Authenticated as ' + user.name
           + ' click to <a href="/logout">logout</a>. '
           + ' You may now access <a href="/admin">/restricted</a>.';
         res.redirect('admin');
       });
     } else {
-      req.session.error = 'Authentication failed, please check your '
+      req.session.errorMessage = 'Authentication failed, please check your '
         + ' username and password.'
         + ' (use "admin" and "admin")';
       res.redirect('login');
