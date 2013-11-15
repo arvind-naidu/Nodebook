@@ -122,7 +122,7 @@ app.post('/login', function(req, res) {
   });
 });
 app.get('/admin', restrict, admin.admin);
-app.get('/savePost', data.savePost);
+app.post('/savePost', data.savePost);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
