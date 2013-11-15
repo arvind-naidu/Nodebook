@@ -6,10 +6,11 @@
 var express = require('express');
 var routes = require('./routes');
 var user = require('./routes/user');
+var data = require('./routes/data');
 var http = require('http');
 var path = require('path');
 var app = express();
-var redis = require('connect-redis')(express);
+var redis = require('redis');
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -21,8 +22,12 @@ app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.methodOverride());
 app.use(express.cookieParser('your secret here'));
+app.use(express.session());
+
+// redis stuff
+/*
 app.use(express.session({
-  store: new redis({
+  store: new connection({
     host: 'pub-redis-10210.us-east-1-4.1.ec2.garantiadata.com',
     port: 10210,
     db: 1,
@@ -30,6 +35,9 @@ app.use(express.session({
   }),
   secret: '1234567890QWERTY'
 }));
+*/
+var client = redis.createClient(10210, 'pub-redis-10210.us-east-1-4.1.ec2.garantiadata.com');
+client.auth("hackdayGuestbook", function() {console.log("Connected!");});
 
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
@@ -41,6 +49,7 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', routes.index);
+app.get('/savePost', data.savePost);
 app.get('/users', user.list);
 
 http.createServer(app).listen(app.get('port'), function(){
